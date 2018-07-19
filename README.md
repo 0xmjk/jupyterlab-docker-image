@@ -21,7 +21,7 @@ Copy/paste this URL into your browser when you connect for the first time,
 
 
 ## Example
-The following notebook can be find at [README.ipynb](http://127.0.0.1:8888/lab/tree/README.ipynb) in your environment.
+The following notebook can be found as [README.ipynb](http://127.0.0.1:8888/lab/tree/README.ipynb) in your environment.
 
 
 ```python
