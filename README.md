@@ -1,6 +1,6 @@
 
 # 0xmjk/mini-jupyterlab
-[0xmjk/mini-jupyterlab](https://github.com/0xmjk/mini-jupyterlab) is a mini Docker container to start you up with working in the [Jupyter Lab](https://github.com/jupyterlab/jupyterlab) environment.
+[0xmjk/mini-jupyterlab](https://github.com/0xmjk/mini-jupyterlab) is a mini Docker container to start you up with working in the [JupyterLab](https://github.com/jupyterlab/jupyterlab) environment.
 
 
 ## Running
