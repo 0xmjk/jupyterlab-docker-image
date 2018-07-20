@@ -13,5 +13,7 @@ WORKDIR /home/jupyterlab
 USER jupyterlab
 ADD jupyter_notebook_config.py /home/jupyterlab/.jupyter/
 ADD README.ipynb /home/jupyterlab/
+RUN mkdir /home/jupyterlab/persisted && chown jupyterlab /home/jupyterlab/persisted
+VOLUME /home/jupyterlab/persisted
 EXPOSE 8888
 ENTRYPOINT jupyter lab
