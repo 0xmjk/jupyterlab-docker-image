@@ -1,6 +1,6 @@
 FROM ubuntu:latest
 RUN apt-get update
-RUN apt-get install -y python3 python3-dev python3-pip npm pandoc
+RUN apt-get install -y python3 python3-dev python3-pip npm pandoc texlive-xetex
 RUN pip3 install numpy==1.14.5 \
                  pandas==0.23.3 \
                  scipy==1.1.0 \
