@@ -1,3 +1,4 @@
+[![](https://images.microbadger.com/badges/image/0xmjk/mini-jupyterlab.svg)](https://microbadger.com/images/0xmjk/mini-jupyterlab "Get your own image badge on microbadger.com")
 
 # 0xmjk/mini-jupyterlab
 [0xmjk/mini-jupyterlab](https://github.com/0xmjk/mini-jupyterlab) is a mini Docker container to start you up with working in the [JupyterLab](https://github.com/jupyterlab/jupyterlab) environment.
