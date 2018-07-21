@@ -1,5 +1,4 @@
 FROM ubuntu:bionic
-RUN pip3 install --upgrade https://github.com/jupyterlab/jupyterlab/archive/v0.33.0rc1.tar.gz
 RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y python3 python3-dev npm pandoc texlive-xetex curl && \
     ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && \
@@ -13,6 +12,10 @@ RUN pip3 install --no-cache-dir numpy==1.14.5 \
                                 scipy==1.1.0 \
                                 matplotlib==2.2.2 \
                                 altair==2.1.0
+# install jupyterlab, and cleanup nodejs yarn cache
+ENV JUPYTER_LAB_TAG=v0.33.0rc1
+RUN pip3 install --no-cache-dir --upgrade https://github.com/jupyterlab/jupyterlab/archive/${JUPYTER_LAB_TAG}.tar.gz && \
+    rm -rf /usr/local/share/.cache/yarn
 RUN jupyter serverextension enable --py jupyterlab
 RUN useradd -m jupyterlab
 WORKDIR /home/jupyterlab
