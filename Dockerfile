@@ -22,7 +22,8 @@ WORKDIR /home/jupyterlab
 USER jupyterlab
 ADD --chown=jupyterlab jupyter_notebook_config.py /home/jupyterlab/.jupyter/
 ADD --chown=jupyterlab README.ipynb /home/jupyterlab/
-RUN mkdir /home/jupyterlab/persisted
+RUN mkdir /home/jupyterlab/persisted && \
+    mkdir -p /home/jupyterlab/.local/lib/python3.6/site-packages
 VOLUME /home/jupyterlab/persisted
 EXPOSE 8888
 ENTRYPOINT jupyter lab
