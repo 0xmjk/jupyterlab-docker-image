@@ -14,7 +14,7 @@ RUN pip3 install --no-cache-dir numpy==1.14.5 \
                                 altair==2.1.0 \
                                 requests==2.19.1
 # install jupyterlab, and cleanup nodejs yarn cache
-ENV JUPYTER_LAB_TAG=v0.33.0rc1
+ENV JUPYTER_LAB_TAG=v0.33.6
 RUN pip3 install --no-cache-dir --upgrade https://github.com/jupyterlab/jupyterlab/archive/${JUPYTER_LAB_TAG}.tar.gz && \
     rm -rf /usr/local/share/.cache/yarn
 RUN jupyter serverextension enable --py jupyterlab
