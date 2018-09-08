@@ -1,6 +1,6 @@
 FROM ubuntu:bionic
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y python3 python3-dev npm pandoc texlive-xetex curl && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y python3 python3-dev npm pandoc texlive-xetex curl git && \
     ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && \
     dpkg-reconfigure --frontend noninteractive tzdata && \
     apt-get clean
@@ -14,6 +14,7 @@ RUN pip3 install --no-cache-dir matplotlib==2.2.2
 RUN pip3 install --no-cache-dir altair==2.1.0
 RUN pip3 install --no-cache-dir requests==2.19.1
 RUN pip3 install --no-cache-dir qgrid==1.1.1
+RUN pip3 install --no-cache-dir git+git://github.com/0xmjk/pandas-qgrid-mixin
 # install jupyterlab, and cleanup nodejs yarn cache
 ENV JUPYTER_LAB_TAG=v0.33.6
 RUN pip3 install --no-cache-dir --upgrade https://github.com/jupyterlab/jupyterlab/archive/${JUPYTER_LAB_TAG}.tar.gz && \
