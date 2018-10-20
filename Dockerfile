@@ -11,17 +11,17 @@ RUN \
   rm -rf /tmp/miniconda.sh && \
   conda install -y python=3.6.5
 # pip install but don't store downloaded
-RUN pip3 install --no-cache-dir numpy==1.15.0
-RUN pip3 install --no-cache-dir pandas==0.23.4
-RUN pip3 install --no-cache-dir scipy==1.1.0
-RUN pip3 install --no-cache-dir matplotlib==2.2.2
-RUN pip3 install --no-cache-dir altair==2.1.0
-RUN pip3 install --no-cache-dir requests==2.19.1
-RUN pip3 install --no-cache-dir qgrid==1.1.1
-RUN pip3 install --no-cache-dir git+git://github.com/0xmjk/pandas-qgrid-mixin
+RUN pip install --no-cache-dir numpy==1.15.0
+RUN pip install --no-cache-dir pandas==0.23.4
+RUN pip install --no-cache-dir scipy==1.1.0
+RUN pip install --no-cache-dir matplotlib==2.2.2
+RUN pip install --no-cache-dir altair==2.1.0
+RUN pip install --no-cache-dir requests==2.19.1
+RUN pip install --no-cache-dir qgrid==1.1.1
+RUN pip install --no-cache-dir git+git://github.com/0xmjk/pandas-qgrid-mixin
 # install jupyterlab, and cleanup nodejs yarn cache
 ENV JUPYTER_LAB_TAG=v0.33.6
-RUN pip3 install --no-cache-dir --upgrade https://github.com/jupyterlab/jupyterlab/archive/${JUPYTER_LAB_TAG}.tar.gz && \
+RUN pip install --no-cache-dir --upgrade https://github.com/jupyterlab/jupyterlab/archive/${JUPYTER_LAB_TAG}.tar.gz && \
     rm -rf /usr/local/share/.cache/yarn
 RUN jupyter serverextension enable --py jupyterlab
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
