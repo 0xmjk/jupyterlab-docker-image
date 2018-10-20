@@ -1,11 +1,15 @@
 FROM ubuntu:bionic
 RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y python3 python3-dev npm pandoc texlive-xetex curl git && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y npm pandoc texlive-xetex curl git && \
     ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && \
     dpkg-reconfigure --frontend noninteractive tzdata && \
     apt-get clean
-# install newest pip -- ubuntu:bionic debs have only pip 9
-RUN curl https://bootstrap.pypa.io/get-pip.py | python3
+# install conda
+RUN \
+  curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh && \
+  bash /tmp/miniconda.sh -bfp /usr/local && \
+  rm -rf /tmp/miniconda.sh && \
+  conda install -y python=3.6.5
 # pip install but don't store downloaded
 RUN pip3 install --no-cache-dir numpy==1.15.0
 RUN pip3 install --no-cache-dir pandas==0.23.4
