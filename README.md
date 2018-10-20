@@ -1,13 +1,13 @@
-[![](https://images.microbadger.com/badges/image/0xmjk/mini-jupyterlab.svg)](https://microbadger.com/images/0xmjk/mini-jupyterlab "Get your own image badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/0xmjk/jupyterlab-docker-image.svg)](https://microbadger.com/images/0xmjk/jupyterlab-docker-image "Get your own image badge on microbadger.com")
 
-# 0xmjk/mini-jupyterlab
-[0xmjk/mini-jupyterlab](https://github.com/0xmjk/mini-jupyterlab) is a mini Docker container to start you up with working in the [JupyterLab](https://github.com/jupyterlab/jupyterlab) environment.
+# 0xmjk/jupyterlab-docker-image
+[0xmjk/jupyterlab-docker-image](https://github.com/0xmjk/jupyterlab-docker-image) is a mini Docker container to start you up with working in the [JupyterLab](https://github.com/jupyterlab/jupyterlab) environment.
 
 
 ## Running
 Start with:
 ```shell
-docker run -ti -v jupyterlab:/home/jupyterlab/persisted -p 8888:8888 0xmjk/mini-jupyterlab:latest
+docker run -ti -v jupyterlab:/home/jupyterlab/persisted -p 8888:8888 0xmjk/jupyterlab-docker-image:latest
 ```
 
 This will start the container using `jupyterlab` local Docker volume mounted in `persisted` folder.
@@ -103,14 +103,6 @@ Enable `matplotlib` to output into this notebook:
 ```python
 df.plot()
 ```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x7ffa6f6cb828>
-
-
-
 
 ![png](README_files/README_8_1.png)
 
