@@ -1,7 +1,7 @@
 [![](https://images.microbadger.com/badges/image/0xmjk/jupyterlab-docker-image.svg)](https://microbadger.com/images/0xmjk/jupyterlab-docker-image "Get your own image badge on microbadger.com")
 
 # 0xmjk/jupyterlab-docker-image
-[0xmjk/jupyterlab-docker-image](https://github.com/0xmjk/jupyterlab-docker-image) is a mini Docker container to start you up with working in the [JupyterLab](https://github.com/jupyterlab/jupyterlab) environment.
+[0xmjk/jupyterlab-docker-image](https://github.com/0xmjk/jupyterlab-docker-image) is a JupyterLab Docker image to start you up with working in the [JupyterLab](https://github.com/jupyterlab/jupyterlab) environment.
 
 
 ## Running
