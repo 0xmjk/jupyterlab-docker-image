@@ -1,0 +1,9 @@
+python=3.6.5-3ubuntu1
+numpy=1.15.0
+pandas=0.23.4
+scipy=1.1.0
+matplotlib=2.2.2
+altair=2.1.0
+requests=2.19.1
+qgrid=1.1.1
+jupyterlab=v0.33.6

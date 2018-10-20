@@ -1,23 +1,32 @@
 FROM ubuntu:bionic
-RUN apt-get update && \
-    DEBIAN_FRONTEND=noninteractive apt-get install -y python3 python3-dev npm pandoc texlive-xetex curl git && \
+ADD installed-versions /etc/
+RUN export $(cat /etc/installed-versions) && \
+    apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y python3=${python} python3-dev=${python} npm pandoc texlive-xetex curl git && \
     ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && \
     dpkg-reconfigure --frontend noninteractive tzdata && \
     apt-get clean
 # install newest pip -- ubuntu:bionic debs have only pip 9
 RUN curl https://bootstrap.pypa.io/get-pip.py | python3
 # pip install but don't store downloaded
-RUN pip3 install --no-cache-dir numpy==1.15.0
-RUN pip3 install --no-cache-dir pandas==0.23.4
-RUN pip3 install --no-cache-dir scipy==1.1.0
-RUN pip3 install --no-cache-dir matplotlib==2.2.2
-RUN pip3 install --no-cache-dir altair==2.1.0
-RUN pip3 install --no-cache-dir requests==2.19.1
-RUN pip3 install --no-cache-dir qgrid==1.1.1
+RUN export $(cat /etc/installed-versions) && \
+  pip3 install --no-cache-dir numpy==${numpy}
+RUN export $(cat /etc/installed-versions) && \
+  pip3 install --no-cache-dir pandas==${pandas}
+RUN export $(cat /etc/installed-versions) && \
+  pip3 install --no-cache-dir scipy==${scipy}
+RUN export $(cat /etc/installed-versions) && \
+  pip3 install --no-cache-dir matplotlib==${matplotlib}
+RUN export $(cat /etc/installed-versions) && \
+  pip3 install --no-cache-dir altair==${altair}
+RUN export $(cat /etc/installed-versions) && \
+  pip3 install --no-cache-dir requests==${requests}
+RUN export $(cat /etc/installed-versions) && \
+  pip3 install --no-cache-dir qgrid==${qgrid}
 RUN pip3 install --no-cache-dir git+git://github.com/0xmjk/pandas-qgrid-mixin
 # install jupyterlab, and cleanup nodejs yarn cache
-ENV JUPYTER_LAB_TAG=v0.33.6
-RUN pip3 install --no-cache-dir --upgrade https://github.com/jupyterlab/jupyterlab/archive/${JUPYTER_LAB_TAG}.tar.gz && \
+RUN export $(cat /etc/installed-versions) && \
+  pip3 install --no-cache-dir --upgrade https://github.com/jupyterlab/jupyterlab/archive/${jupyterlab}.tar.gz && \
     rm -rf /usr/local/share/.cache/yarn
 RUN jupyter serverextension enable --py jupyterlab
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
