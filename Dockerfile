@@ -8,29 +8,31 @@ RUN export $(cat /etc/installed-versions) && \
     apt-get clean
 # install conda
 RUN \
+  export $(cat /etc/installed-versions) && \
   curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh && \
   bash /tmp/miniconda.sh -bfp /usr/local && \
   rm -rf /tmp/miniconda.sh && \
-  conda install -y python=3.6.5
+  conda install -y python=${python} && \
+  conda clean -pt
 # pip install but don't store downloaded
 RUN export $(cat /etc/installed-versions) && \
-  pip3 install --no-cache-dir numpy==${numpy}
+  conda install -y numpy=${numpy} && conda clean -pt
 RUN export $(cat /etc/installed-versions) && \
-  pip3 install --no-cache-dir pandas==${pandas}
+  conda install -y pandas=${pandas} && conda clean -pt
 RUN export $(cat /etc/installed-versions) && \
-  pip3 install --no-cache-dir scipy==${scipy}
+  conda install -y scipy=${scipy} && conda clean -pt
 RUN export $(cat /etc/installed-versions) && \
-  pip3 install --no-cache-dir matplotlib==${matplotlib}
+  conda install -y matplotlib=${matplotlib} && conda clean -pt
 RUN export $(cat /etc/installed-versions) && \
-  pip3 install --no-cache-dir altair==${altair}
+  conda install -c conda-forge -y altair=${altair} && conda clean -pt
 RUN export $(cat /etc/installed-versions) && \
-  pip3 install --no-cache-dir requests==${requests}
+  pip install --no-cache-dir requests==${requests}
 RUN export $(cat /etc/installed-versions) && \
-  pip3 install --no-cache-dir qgrid==${qgrid}
-RUN pip3 install --no-cache-dir git+git://github.com/0xmjk/pandas-qgrid-mixin
+  pip install --no-cache-dir qgrid==${qgrid}
+RUN pip install --no-cache-dir git+git://github.com/0xmjk/pandas-qgrid-mixin
 # install jupyterlab, and cleanup nodejs yarn cache
-RUN export $(cat /etc/installed-versions) && \
-  pip3 install --no-cache-dir --upgrade https://github.com/jupyterlab/jupyterlab/archive/${jupyterlab}.tar.gz && \
+RUN  export $(cat /etc/installed-versions) && \
+  pip install --no-cache-dir --upgrade https://github.com/jupyterlab/jupyterlab/archive/${jupyterlab}.tar.gz && \
     rm -rf /usr/local/share/.cache/yarn
 RUN jupyter serverextension enable --py jupyterlab
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
