@@ -1,4 +1,4 @@
-python=3.6.5-3ubuntu1
+python=3.6.5
 numpy=1.15.0
 pandas=0.23.4
 scipy=1.1.0
