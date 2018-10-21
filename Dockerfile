@@ -1,4 +1,4 @@
-FROM ubuntu:bionic
+FROM ubuntu:bionic AS conda-latest
 ADD installed-versions /etc/
 RUN export $(cat /etc/installed-versions) && \
     apt-get update && \
@@ -48,3 +48,8 @@ VOLUME /home/jupyterlab/persisted
 ENV PYTHONSTARTUP=/home/jupyterlab/.jupyter/startup.py
 EXPOSE 8888
 ENTRYPOINT jupyter lab
+
+FROM conda-latest AS conda-cling-latest
+USER root
+RUN conda install -y xeus-cling notebook -c QuantStack -c conda-forge
+USER jupyterlab
