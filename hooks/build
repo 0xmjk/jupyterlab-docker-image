@@ -1,0 +1,4 @@
+#!/bin/bash
+set -x
+docker build -f $DOCKERFILE_PATH --target conda-latest -t ${DOCKER_REPO}:conda-latest .
+docker build -f $DOCKERFILE_PATH --target conda-cling-latest -t ${DOCKER_REPO}:conda-cling-latest .
