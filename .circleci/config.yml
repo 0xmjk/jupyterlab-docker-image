@@ -1,0 +1,44 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: cibuilds/hugo:latest
+        environment:
+          USER_EMAIL: "michal.kubski@gmail.com"
+          USER_NAME: "CircleCI for ${CIRCLE_USERNAME}"
+    working_directory: ~/
+    steps:
+      # install git
+      - run: apk update && apk add git
+
+      # checkout the repository twice - the src and dest repos
+      - checkout:
+          path: gh-pages-src
+      - checkout:
+          path: gh-pages
+
+      - run:
+          name: checkout source branch
+          command: |
+            cd gh-pages-src
+            git checkout gh-pages-src
+      - run:
+          name: checkout output branch
+          command: |
+            cd gh-pages
+            git checkout gh-pages
+            
+      - run:
+          name: copy output files to gh-pages
+          command: |
+            cd gh-pages-src/public
+            cp -vR * ../../gh-pages
+
+      - run:
+          name: commit built page
+          command: |
+            cd gh-pages
+            git config --global user.email "${USER_EMAIL}"
+            git config --global user.name "${USER_NAME}"
+            git commit -a -m "Applying ${CIRCLE_SHA1} from ${CIRCLE_BRANCH}"
+            git push -q https://${GH_TOKEN}@github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME}.git gh-pages
