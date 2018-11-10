@@ -1,4 +1,13 @@
 #!/bin/bash
 set -x
-docker push ${DOCKER_REPO}:conda-latest
-docker push ${DOCKER_REPO}:conda-cling-latest
+
+if [ $SOURCE_BRANCH == conda ]; then
+  TAG=conda-latest
+  TAG_CLING=conda-cling-latest
+elif [[ $SOURCE_BRANCH =~ (^[0-9.]+)-conda ]]; then
+  TAG=conda-${BASH_REMATCH[1]}
+  TAG_CLING=conda-${BASH_REMATCH[1]}
+fi
+
+docker push ${DOCKER_REPO}:${TAG}
+docker push ${DOCKER_REPO}:${TAG_CLING}
