@@ -6,4 +6,4 @@ matplotlib=2.2.2
 altair=2.1.0
 requests=2.19.1
 qgrid=1.1.1
-jupyterlab=v0.33.6
+jupyterlab=v0.35.4
