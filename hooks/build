@@ -7,6 +7,8 @@ if [ $SOURCE_BRANCH == conda ]; then
 elif [[ $SOURCE_BRANCH =~ (^[0-9.]+)-conda ]]; then
   TAG=conda-${BASH_REMATCH[1]}
   TAG_CLING=conda-${BASH_REMATCH[1]}
+else
+  exit 1
 fi
 
 
