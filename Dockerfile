@@ -31,16 +31,20 @@ RUN export $(cat /etc/installed-versions) && \
   conda install -c conda-forge -y altair=${altair} && conda clean -pt
 RUN export $(cat /etc/installed-versions) && \
   pip install --no-cache-dir requests==${requests}
-RUN export $(cat /etc/installed-versions) && \
-  pip install --no-cache-dir qgrid==${qgrid}
-RUN pip install --no-cache-dir git+git://github.com/0xmjk/pandas-qgrid-mixin
 # install jupyterlab, and cleanup nodejs yarn cache
 RUN  export $(cat /etc/installed-versions) && \
   pip install --no-cache-dir --upgrade https://github.com/jupyterlab/jupyterlab/archive/${jupyterlab}.tar.gz && \
     rm -rf /usr/local/share/.cache/yarn
 RUN jupyter serverextension enable --py jupyterlab
 RUN jupyter labextension install @jupyter-widgets/jupyterlab-manager
-RUN jupyter labextension install qgrid
+# Until https://github.com/quantopian/qgrid/issues/261 is closed
+# qgrid will be installed from my fork
+RUN export $(cat /etc/installed-versions) && \
+  git clone ${qgrid} /usr/src/qgrid && \
+  cd /usr/src/qgrid && \
+  pip install --no-cache-dir . && \
+  jupyter labextension install js/ 
+RUN pip install --no-cache-dir git+git://github.com/0xmjk/pandas-qgrid-mixin
 RUN useradd -m jupyterlab
 WORKDIR /home/jupyterlab
 USER jupyterlab
