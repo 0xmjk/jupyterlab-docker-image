@@ -13,4 +13,4 @@ fi
 
 
 docker build -f $DOCKERFILE_PATH --target conda-latest -t ${DOCKER_REPO}:${TAG} .
-docker build -f $DOCKERFILE_PATH --target conda-cling-latest -t ${DOCKER_REPO}:${TAG_CLING} .
+# docker build -f $DOCKERFILE_PATH --target conda-cling-latest -t ${DOCKER_REPO}:${TAG_CLING} .

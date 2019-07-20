@@ -43,7 +43,7 @@ RUN export $(cat /etc/installed-versions) && \
   git clone ${qgrid} /usr/src/qgrid && \
   cd /usr/src/qgrid && \
   pip install --no-cache-dir . && \
-  jupyter labextension install js/ 
+  jupyter labextension install js/
 RUN pip install --no-cache-dir git+git://github.com/0xmjk/pandas-qgrid-mixin
 RUN useradd -m jupyterlab
 WORKDIR /home/jupyterlab
@@ -57,7 +57,8 @@ ENV PYTHONSTARTUP=/home/jupyterlab/.jupyter/startup.py
 EXPOSE 8888
 ENTRYPOINT jupyter lab
 
-FROM conda-latest AS conda-cling-latest
-USER root
-RUN conda install -y xeus-cling notebook -c QuantStack -c conda-forge
-USER jupyterlab
+# FROM conda-latest AS conda-cling-latest
+# USER root
+# RUN conda config --add channels QuantStack
+# RUN conda install -y xeus-cling
+# USER jupyterlab
