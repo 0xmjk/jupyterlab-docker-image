@@ -1,17 +1,18 @@
 FROM ubuntu:bionic AS conda-latest
-ADD installed-versions /etc/
-RUN export $(cat /etc/installed-versions) && \
-    apt-get update && \
+RUN apt-get update && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y npm pandoc texlive-xetex curl git && \
     ln -fs /usr/share/zoneinfo/Europe/London /etc/localtime && \
     dpkg-reconfigure --frontend noninteractive tzdata && \
     apt-get clean
 # install conda
 RUN \
-  export $(cat /etc/installed-versions) && \
   curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh && \
   bash /tmp/miniconda.sh -bfp /usr/local && \
-  rm -rf /tmp/miniconda.sh && \
+  rm -rf /tmp/miniconda.sh
+ADD installed-versions /etc/
+# install python
+RUN \
+  export $(cat /etc/installed-versions) && \
   conda install -y python=${python} && \
   conda clean -pt
 # pip install but don't store downloaded
