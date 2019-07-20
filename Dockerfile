@@ -9,6 +9,9 @@ RUN \
   curl -sSL https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -o /tmp/miniconda.sh && \
   bash /tmp/miniconda.sh -bfp /usr/local && \
   rm -rf /tmp/miniconda.sh
+# add conda-forge repo
+RUN conda config --add channels conda-forge && \
+    conda config --set channel_priority strict
 ADD installed-versions /etc/
 # install python
 RUN \
